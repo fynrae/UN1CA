@@ -1,0 +1,4 @@
+ro.product.odm.model=SM-A336M
+ro.product.odm.name=a33xub
+ro.odm.build.fingerprint=samsung/a33xub/a33x:12/SP1A.210812.016/A336MUBSEFYH2:user/release-keys
+ro.odm.build.version.incremental=A336MUBSEFYH2

@@ -152,15 +152,15 @@ _GET_SELINUX_LABEL()
     fi
 
     local LABEL
-    LABEL=$(perl -ne '
+    LABEL=$(MATCH_PATH="$FILE" perl -ne '
         next if /^\s*#/ || /^\s*$/;
         s/\s+/ /g;
         my ($pattern, $label) = split(" ", $_, 3);
-        if ($ARGV[0] =~ /^$pattern$/) {
+        if ($ENV{MATCH_PATH} =~ /^$pattern$/) {
             print "$label\n";
             exit;
         }
-    ' - "$FILE" <<< "$(tac "$FC_FILE")")
+    ' - <<< "$(tac "$FC_FILE")")
     echo "$LABEL"
 }
 

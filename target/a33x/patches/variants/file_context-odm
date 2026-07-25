@@ -1,0 +1,7 @@
+/odm/etc u:object_r:vendor_file:s0
+/odm/etc/sku u:object_r:vendor_file:s0
+/odm/etc/sku/SM-A3360\.prop u:object_r:vendor_file:s0
+/odm/etc/sku/SM-A336B\.prop u:object_r:vendor_file:s0
+/odm/etc/sku/SM-A336E\.prop u:object_r:vendor_file:s0
+/odm/etc/sku/SM-A336M\.prop u:object_r:vendor_file:s0
+/odm/etc/sku/SM-A336N\.prop u:object_r:vendor_file:s0

@@ -1,0 +1,67 @@
+# a33xzh (chn_hk)
+on early-init && property:ro.boot.em.model=SM-A3360
+    # Firmware blobs
+    mount none /vendor/firmware/SM-A3360/AP_AUDIO_SLSI.bin /vendor/firmware/AP_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A3360/APDV_AUDIO_SLSI.bin /vendor/firmware/APDV_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A3360/mfc_fw.bin /vendor/firmware/mfc_fw.bin bind
+    mount none /vendor/firmware/SM-A3360/NPU.bin /vendor/firmware/NPU.bin bind
+    mount none /vendor/firmware/SM-A3360/os.checked.bin /vendor/firmware/os.checked.bin bind
+    mount none /vendor/firmware/SM-A3360/vts.bin /vendor/firmware/vts.bin bind
+    mount none /vendor/firmware/SM-A3360/calliope_sram.bin /vendor/firmware/calliope_sram.bin bind
+    # TEEgris
+    mount none /vendor/firmware/tee/SM-A3360 /vendor/tee bind
+
+# a33xnsxx (eur_open)
+on early-init && property:ro.boot.em.model=SM-A336B
+    # Firmware blobs
+    mount none /vendor/firmware/SM-A336B/AP_AUDIO_SLSI.bin /vendor/firmware/AP_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336B/APDV_AUDIO_SLSI.bin /vendor/firmware/APDV_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336B/mfc_fw.bin /vendor/firmware/mfc_fw.bin bind
+    mount none /vendor/firmware/SM-A336B/NPU.bin /vendor/firmware/NPU.bin bind
+    mount none /vendor/firmware/SM-A336B/os.checked.bin /vendor/firmware/os.checked.bin bind
+    mount none /vendor/firmware/SM-A336B/vts.bin /vendor/firmware/vts.bin bind
+    mount none /vendor/firmware/SM-A336B/calliope_sram.bin /vendor/firmware/calliope_sram.bin bind
+    # TEEgris
+    mount none /vendor/firmware/tee/SM-A336B /vendor/tee bind
+
+# a33xnsdxx (asia_open)
+on early-init && property:ro.boot.em.model=SM-A336E
+    # Firmware blobs
+    mount none /vendor/firmware/SM-A336E/AP_AUDIO_SLSI.bin /vendor/firmware/AP_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336E/APDV_AUDIO_SLSI.bin /vendor/firmware/APDV_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336E/mfc_fw.bin /vendor/firmware/mfc_fw.bin bind
+    mount none /vendor/firmware/SM-A336E/NPU.bin /vendor/firmware/NPU.bin bind
+    mount none /vendor/firmware/SM-A336E/os.checked.bin /vendor/firmware/os.checked.bin bind
+    mount none /vendor/firmware/SM-A336E/vts.bin /vendor/firmware/vts.bin bind
+    mount none /vendor/firmware/SM-A336E/calliope_sram.bin /vendor/firmware/calliope_sram.bin bind
+    # TEEgris
+    mount none /vendor/firmware/tee/SM-A336E /vendor/tee bind
+
+# a33xub (latam_open)
+on early-init && property:ro.boot.em.model=SM-A336M
+    # Firmware blobs
+    mount none /vendor/firmware/SM-A336M/AP_AUDIO_SLSI.bin /vendor/firmware/AP_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336M/APDV_AUDIO_SLSI.bin /vendor/firmware/APDV_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336M/mfc_fw.bin /vendor/firmware/mfc_fw.bin bind
+    mount none /vendor/firmware/SM-A336M/NPU.bin /vendor/firmware/NPU.bin bind
+    mount none /vendor/firmware/SM-A336M/os.checked.bin /vendor/firmware/os.checked.bin bind
+    mount none /vendor/firmware/SM-A336M/vts.bin /vendor/firmware/vts.bin bind
+    mount none /vendor/firmware/SM-A336M/calliope_sram.bin /vendor/firmware/calliope_sram.bin bind
+    # TEEgris
+    mount none /vendor/firmware/tee/SM-A336M /vendor/tee bind
+
+# a33xks (kor_singlex)
+on early-init && property:ro.boot.em.model=SM-A336N
+    # Firmware blobs
+    mount none /vendor/firmware/SM-A336N/AP_AUDIO_SLSI.bin /vendor/firmware/AP_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336N/APDV_AUDIO_SLSI.bin /vendor/firmware/APDV_AUDIO_SLSI.bin bind
+    mount none /vendor/firmware/SM-A336N/mfc_fw.bin /vendor/firmware/mfc_fw.bin bind
+    mount none /vendor/firmware/SM-A336N/NPU.bin /vendor/firmware/NPU.bin bind
+    mount none /vendor/firmware/SM-A336N/os.checked.bin /vendor/firmware/os.checked.bin bind
+    mount none /vendor/firmware/SM-A336N/vts.bin /vendor/firmware/vts.bin bind
+    mount none /vendor/firmware/SM-A336N/calliope_sram.bin /vendor/firmware/calliope_sram.bin bind
+    # TEEgris
+    mount none /vendor/firmware/tee/SM-A336N /vendor/tee bind
+
+on boot
+    restart audioserver

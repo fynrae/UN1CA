@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a52sxq, a53x, a73xq, b0q, g0q, m52xq, o1s, p3s, r0q, r9s, t2s]
+        target: [a33x]
 
     steps:
       - name: Checkout repo
@@ -62,6 +62,17 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
+      - name: Cache workspace and firmware
+        uses: actions/cache@v4
+        with:
+          path: |
+            fw
+            out
+            work
+          key: ${{ runner.os }}-build-fw-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-fw-
+
       - name: Build dependencies
         run: |
           source ./buildenv.sh ${{ matrix.target }}
@@ -77,7 +88,20 @@ jobs:
           source ./buildenv.sh ${{ matrix.target }}
           ./scripts/extract_fw.sh
 
+      - name: Clean stale ROM outputs
+        run: |
+          rm -f out/*-target_files.zip
+          rm -f out/UN1CA_*.zip
+
       - name: Build ROM
         run: |
           source ./buildenv.sh ${{ matrix.target }}
-          ./scripts/make_rom.sh
+          ./scripts/make_rom.sh -z
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: UN1CA-${{ matrix.target }}
+          path: out/UN1CA_*.zip

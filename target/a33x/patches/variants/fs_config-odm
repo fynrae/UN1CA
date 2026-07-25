@@ -1,0 +1,8 @@
+odm 0 0 755 capabilities=0x0
+odm/etc 0 0 755 capabilities=0x0
+odm/etc/sku 0 0 755 capabilities=0x0
+odm/etc/sku/SM-A3360.prop 0 0 600 capabilities=0x0
+odm/etc/sku/SM-A336B.prop 0 0 600 capabilities=0x0
+odm/etc/sku/SM-A336E.prop 0 0 600 capabilities=0x0
+odm/etc/sku/SM-A336M.prop 0 0 600 capabilities=0x0
+odm/etc/sku/SM-A336N.prop 0 0 600 capabilities=0x0
