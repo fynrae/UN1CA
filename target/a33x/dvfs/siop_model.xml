@@ -107,7 +107,7 @@
             <limiter name="CpLowMode" temp="410:430" value="-1:1" />
             <limiter name="SADisable" temp="410:440" value="-1:1" />
         </component>
-        
+
         <component name="CHG+DISPLAY" tempType="SKIN">
             <limiter name="Charging" temp="360" value="-1:70" />
         </component>

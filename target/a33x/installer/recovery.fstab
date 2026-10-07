@@ -61,11 +61,3 @@ odm	/odm	f2fs	ro	avb,logical,first_stage_mount
 /dev/block/by-name/vbmeta_samsung	/vbmeta_samsung	emmc	default	recoveryonly
 system_ext	/system_ext	f2fs	ro	avb,logical,first_stage_mount
 vendor_dlkm	/vendor_dlkm	f2fs	ro	avb,logical,first_stage_mount
-
-
-
-
-
-
-
-

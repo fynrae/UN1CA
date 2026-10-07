@@ -5,7 +5,7 @@ GET_URL()
 
     local KERNEL_URL="https://api.github.com/repos/UN1CA/kernel_samsung_s5e8825/releases/latest"
     local CURL_CMD="curl -s"
-    
+
     if [ -n "$GITHUB_TOKEN" ]; then
         CURL_CMD="curl -s -H \"Authorization: token $GITHUB_TOKEN\""
     fi
