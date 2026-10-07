@@ -233,6 +233,18 @@ fi
 #       - `SEC_AUDIO_SUPPORT_VIRTUAL_VIBRATION_SOUND` in the `com.samsung.android.audio.Rune` class inside `framework.jar` is set to true
 #       - `SUPPORT_VIRTUAL_VIBRATION_SOUND` in the `com.samsung.android.vibrator.VibRune` class inside `framework.jar` is set to true
 #
+#   [SOURCE/TARGET]_BLUETOOTH_SUPPORT_A2DPSINK_PROFILE
+#     Boolean which describes whether the device supports Bluetooth A2DP Sink mode.
+#
+#   [SOURCE/TARGET]_BLUETOOTH_SUPPORT_A2DP_SBM
+#     Boolean which describes whether the device supports Bluetooth A2DP Smart Buffer Management.
+#
+#   [SOURCE/TARGET]_BLUETOOTH_SUPPORT_HEAD_SAR_BACKOFF
+#     Boolean which describes whether the device supports Bluetooth head SAR backoff.
+#
+#   [SOURCE/TARGET]_BLUETOOTH_SUPPORT_XLNA_CONTROL
+#     Boolean which describes whether the device supports controlling the Bluetooth LNA via the accelerometer sensor.
+#
 #   [SOURCE/TARGET]_CAMERA_SUPPORT_CAMERAX_EXTENSION
 #     Boolean which describes whether the device supports CameraX Extensions API.
 #     It can be checked in the following ways:
@@ -373,6 +385,11 @@ fi
 #       - `cosName` value in the `com.samsung.android.service.SemService.SemServiceManager` class inside `framework.jar`
 #       - `mEseCosName` value in the `com.android.se.internal.UtilExtension` class inside `SecureElement.apk`
 #
+#   [SOURCE/TARGET]_SECURITY_SUPPORT_ESEK
+#     Boolean which describes whether the device supports eSE Key (eSEK).
+#     It can be checked in the following ways:
+#       - `supportEsek` in the `com.android.server.SemService` class inside `framework.jar` is set to true
+#
 #   [SOURCE/TARGET]_WLAN_CONFIG_CONNECTION_PERSONALIZATION
 #     Integer containing the device Connection Personalizer feature flag.
 #
@@ -391,6 +408,12 @@ fi
 #   [SOURCE/TARGET]_WLAN_CONFIG_L1SS_DISABLE_THRESHOLD
 #     Integer containing the device L1ss boost threshold.
 #
+#   [SOURCE/TARGET]_WLAN_CONFIG_SEPARATE_ANT_BACKOFF
+#     String containing the device Wi-Fi body SAR backoff config for separate antennas.
+#
+#   [SOURCE/TARGET]_WLAN_CONFIG_SINGLE_ANT_BACKOFF
+#     String containing the device Wi-Fi body SAR backoff config for single antenna.
+#
 #   [SOURCE/TARGET]_WLAN_SUPPORT_80211AX
 #     Boolean which describes whether the device supports the Wi-Fi 6 standard.
 #
@@ -408,6 +431,9 @@ fi
 #
 #   [SOURCE/TARGET]_WLAN_SUPPORT_MIMO
 #     Boolean which describes whether the device supports the MIMO standard.
+#
+#   [SOURCE/TARGET]_WLAN_SUPPORT_MOBILEAP_11AX
+#     Boolean which describes whether the device supports Wi-Fi 6 Mobile Hotspot.
 #
 #   [SOURCE/TARGET]_WLAN_SUPPORT_MOBILEAP_5G_BASEDON_COUNTRY
 #     Boolean which describes whether the device should enable the 5Ghz Mobile Hotspot band depending the country code.
@@ -506,6 +532,14 @@ fi
     GET_BUILD_VAR "TARGET_AUDIO_SUPPORT_DUAL_SPEAKER"
     GET_BUILD_VAR "SOURCE_AUDIO_SUPPORT_VIRTUAL_VIBRATION_SOUND"
     GET_BUILD_VAR "TARGET_AUDIO_SUPPORT_VIRTUAL_VIBRATION_SOUND"
+    GET_BUILD_VAR "SOURCE_BLUETOOTH_SUPPORT_A2DPSINK_PROFILE"
+    GET_BUILD_VAR "TARGET_BLUETOOTH_SUPPORT_A2DPSINK_PROFILE"
+    GET_BUILD_VAR "SOURCE_BLUETOOTH_SUPPORT_A2DP_SBM"
+    GET_BUILD_VAR "TARGET_BLUETOOTH_SUPPORT_A2DP_SBM"
+    GET_BUILD_VAR "SOURCE_BLUETOOTH_SUPPORT_HEAD_SAR_BACKOFF"
+    GET_BUILD_VAR "TARGET_BLUETOOTH_SUPPORT_HEAD_SAR_BACKOFF"
+    GET_BUILD_VAR "SOURCE_BLUETOOTH_SUPPORT_XLNA_CONTROL"
+    GET_BUILD_VAR "TARGET_BLUETOOTH_SUPPORT_XLNA_CONTROL"
     GET_BUILD_VAR "SOURCE_CAMERA_SUPPORT_CAMERAX_EXTENSION"
     GET_BUILD_VAR "TARGET_CAMERA_SUPPORT_CAMERAX_EXTENSION"
     GET_BUILD_VAR "SOURCE_CAMERA_SUPPORT_CUTOUT_PROTECTION"
@@ -556,6 +590,8 @@ fi
     GET_BUILD_VAR "TARGET_SECURITY_CONFIG_ESE_CHIP_VENDOR" "none"
     GET_BUILD_VAR "SOURCE_SECURITY_CONFIG_ESE_COS_NAME" "none"
     GET_BUILD_VAR "TARGET_SECURITY_CONFIG_ESE_COS_NAME" "none"
+    GET_BUILD_VAR "SOURCE_SECURITY_SUPPORT_ESEK" "$(test "$SOURCE_SECURITY_CONFIG_ESE_COS_NAME" && echo "" || echo "false")"
+    GET_BUILD_VAR "TARGET_SECURITY_SUPPORT_ESEK" "$(test "$TARGET_SECURITY_CONFIG_ESE_COS_NAME" && echo "" || echo "false")"
     GET_BUILD_VAR "SOURCE_WLAN_CONFIG_CONNECTION_PERSONALIZATION"
     GET_BUILD_VAR "TARGET_WLAN_CONFIG_CONNECTION_PERSONALIZATION"
     GET_BUILD_VAR "SOURCE_WLAN_CONFIG_CPU_CSTATE_DISABLE_THRESHOLD"
@@ -568,6 +604,10 @@ fi
     GET_BUILD_VAR "TARGET_WLAN_CONFIG_DYNAMIC_SWITCH"
     GET_BUILD_VAR "SOURCE_WLAN_CONFIG_L1SS_DISABLE_THRESHOLD"
     GET_BUILD_VAR "TARGET_WLAN_CONFIG_L1SS_DISABLE_THRESHOLD"
+    GET_BUILD_VAR "SOURCE_WLAN_CONFIG_SEPARATE_ANT_BACKOFF" "none"
+    GET_BUILD_VAR "TARGET_WLAN_CONFIG_SEPARATE_ANT_BACKOFF" "none"
+    GET_BUILD_VAR "SOURCE_WLAN_CONFIG_SINGLE_ANT_BACKOFF" "none"
+    GET_BUILD_VAR "TARGET_WLAN_CONFIG_SINGLE_ANT_BACKOFF" "none"
     GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_80211AX"
     GET_BUILD_VAR "TARGET_WLAN_SUPPORT_80211AX"
     GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_80211AX_6GHZ"
@@ -580,6 +620,8 @@ fi
     GET_BUILD_VAR "TARGET_WLAN_SUPPORT_MBO"
     GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_MIMO"
     GET_BUILD_VAR "TARGET_WLAN_SUPPORT_MIMO"
+    GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_MOBILEAP_11AX"
+    GET_BUILD_VAR "TARGET_WLAN_SUPPORT_MOBILEAP_11AX"
     GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_MOBILEAP_5G_BASEDON_COUNTRY"
     GET_BUILD_VAR "TARGET_WLAN_SUPPORT_MOBILEAP_5G_BASEDON_COUNTRY"
     GET_BUILD_VAR "SOURCE_WLAN_SUPPORT_MOBILEAP_6G"

@@ -72,14 +72,17 @@ GET_GALAXY_STORE_DOWNLOAD_URL()
     local DEVICES
     local OS
     local ONEUI
+    local SYSTEMID
     local PROTOCOL
 
     # Galaxy S25 Ultra EUR_OPENX
     # Galaxy S22 Ultra GBL_OPENX
-    DEVICES=("SM-S938B" "SM-S901E")
+    # Galaxy S25 Ultra KOR_SINGLEX
+    DEVICES=("SM-S938B" "SM-S901E" "SM-S938N")
 
     OS="$(GET_PROP "system" "ro.build.version.sdk")"
     ONEUI="$(GET_PROP "system" "ro.build.version.oneui")"
+    SYSTEMID="$(date "+%s")"
 
     if [ ! "$OS" ]; then
         # Fallback to Android 16
@@ -92,7 +95,7 @@ GET_GALAXY_STORE_DOWNLOAD_URL()
 
     PROTOCOL+="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"
     PROTOCOL+="<SamsungProtocol networkType=\"0\" openApiVersion=\"$OS\" deviceModel=\"DEVICE\""
-    PROTOCOL+=" mcc=\"262\" mnc=\"01\" csc=\"EUX\" version=\"7.7\""
+    PROTOCOL+=" mcc=\"262\" mnc=\"01\" csc=\"EUX\" version=\"7.7\" systemId=\"$SYSTEMID\""
     PROTOCOL+=" deviceFeature=\"locale=en_GB||abi32=armeabi-v7a:armeabi||abi64=arm64-v8a||oneUiVersion=$ONEUI\">"
     PROTOCOL+="<request id=\"2303\" numParam=\"2\">"
     PROTOCOL+="<param name=\"stduk\">0</param>"
@@ -106,7 +109,7 @@ GET_GALAXY_STORE_DOWNLOAD_URL()
         if [[ "$PACKAGE" =~ ^[+-]?[0-9]+$ ]]; then
             OUT="$PACKAGE"
         else
-            OUT="$(curl -L -s "https://vas.samsungapps.com/stub/stubUpdateCheck.as?appId=$PACKAGE&versionCode=0&deviceId=$i&mcc=262&mnc=01&csc=EUX&sdkVer=$OS&oneUiVersion=$ONEUI&systemId=0")"
+            OUT="$(curl -L -s "https://vas.samsungapps.com/stub/stubUpdateCheck.as?appId=$PACKAGE&versionCode=0&deviceId=$i&mcc=262&mnc=01&csc=EUX&sdkVer=$OS&oneUiVersion=$ONEUI&systemId=$SYSTEMID")"
             OUT="$(grep -o -P "(?<=<productId>)[^<]+" <<< "$OUT")"
             if [ ! "$OUT" ]; then
                 continue
@@ -210,7 +213,7 @@ SET_FLOATING_FEATURE_CONFIG()
         return 1
     fi
 
-    if grep -q "$CONFIG" "$FILE"; then
+    if grep -q "<$CONFIG>" "$FILE"; then
         if [[ "$VALUE" == "-d" ]] || [[ "$VALUE" == "--delete" ]]; then
             LOG "- Deleting \"$CONFIG\" config in /system/system/etc/floating_feature.xml"
             sed -i "/<$CONFIG>/d" "$FILE"

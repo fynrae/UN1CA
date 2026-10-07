@@ -17,6 +17,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - module: "Galaxy A52 (a52qnsxx)"
+            device: "a52qnsxx"
+            firmware: "SM-A525F/EUX/352938771234569"
           - module: "Galaxy A53 5G (a53xtfn)"
             device: "a53xtfn"
             firmware: "SM-S536DL/TFA/352574701234567"
@@ -35,6 +38,9 @@ jobs:
           - module: "Galaxy Tab A9+ 5G (gta9pxxx)"
             device: "gta9pxxx"
             firmware: "SM-X216B/EUX/352862571234563"
+          - module: "Galaxy Jump3 (m44xktt)"
+            device: "m44xktt"
+            firmware: "SM-M446K/KTC/350454001234561"
           - module: "Galaxy S21 FE 5G (Snapdragon) (r9qxxx)"
             device: "r9qxxx"
             firmware: "SM-G990B/EUX/353718681234563"
@@ -57,7 +63,7 @@ jobs:
       - name: Free disk space (2/3)
         uses: jlumbroso/free-disk-space@main
         with:
-          tool-cache: true
+          preinstalled-runtimes: true
 
       - name: Free disk space (3/3)
         uses: rokibhasansagar/slimhub_actions@main
@@ -78,20 +84,34 @@ jobs:
           echo -n "${{ secrets.PLATFORM_KEY_PEM }}" | base64 --decode > security/unica_platform.x509.pem
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'gradle'
 
-      - name: Build dependencies
+      - name: Generate build config
         run: |
           source ./buildenv.sh a52sxq
-          ./scripts/build_dependencies.sh
+          {
+            echo "DEBUG=$DEBUG"
+            echo "SRC_DIR=$SRC_DIR"
+            echo "OUT_DIR=$OUT_DIR"
+            echo "ODIN_DIR=$ODIN_DIR"
+            echo "FW_DIR=$FW_DIR"
+            echo "TOOLS_DIR=$TOOLS_DIR"
+            echo "APKTOOL_DIR=$APKTOOL_DIR"
+            echo "WORK_DIR=$WORK_DIR"
+            echo "TMP_DIR=$TMP_DIR"
+          } >> "$GITHUB_ENV"
+          sed -e "/Automatically/d" -e "s/\"//g" "$OUT_DIR/config.sh" >> "$GITHUB_ENV"
+          echo "$TOOLS_DIR/bin" >> "$GITHUB_PATH"
+
+      - name: Build dependencies
+        run: ./scripts/build_dependencies.sh
 
       - name: Update prebuilt blobs
         run: |
-          source ./buildenv.sh a52sxq
           ./scripts/internal/update_prebuilt_blobs.sh "${{ matrix.device }}" "${{ matrix.firmware }}"
           echo "PDA_BUILD=$(cat "./prebuilts/samsung/${{ matrix.device }}/.current" | cut -d "/" -f "1")" >> "$GITHUB_ENV"
 
